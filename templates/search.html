@@ -37,7 +37,19 @@
 		</div>
 		{% if found %}
 			<div class="card-panel">
-				<div class="card center-align light-blue">
+				{% if cover %}
+					<div class="container">
+						<div class="card center-align">
+							<div class="card-header grey lighten-3">
+								<h4>Cover</h4>
+							</div>
+							<div class="card-image" style="width: 50%; margin:auto;">
+								<img src="{{ cover }}">
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Title</h4>
 					</div>
@@ -46,7 +58,7 @@
 					</div>
 				</div>
 				 
-				<div class="card center-align light-blue">
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Year</h4>
 					</div>
@@ -54,7 +66,7 @@
 						<h5>{{ movie.year }}</h5>
 					</div>
 				</div>
-				<div class="card center-align light-blue">
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Plot</h4>
 					</div>
@@ -62,7 +74,7 @@
 						<h5>{{ movie.plot }}</h5>
 					</div>
 				</div>
-				<div class="card center-align light-blue">
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Director</h4>
 					</div>
@@ -78,7 +90,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="card center-align light-blue">
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Writer</h4>
 					</div>
@@ -94,7 +106,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="card center-align light-blue">
+				<div class="card center-align light-blue lighten-2">
 					<div class="card-header grey lighten-3">
 						<h4>Stars</h4>
 					</div>

@@ -3,7 +3,7 @@ from re import findall
 
 # imdb 
 from imdb import IMDb
-#rom imdb.helpers import get_byURL
+#from imdb.helpers import get_byURL
 
 from .models import Movie
 # Create your views here.
@@ -11,8 +11,8 @@ from .models import Movie
 def search(request):
 	url = request.POST.get('imdb_url')
 	found = False
+	cover = None
 	if url:
-		print(url)
 		ID = findall(r'\d+', url)[0]
 		imdb_obj = IMDb()
 		MOVIE = imdb_obj.get_movie(ID)
@@ -23,6 +23,7 @@ def search(request):
 		rating = MOVIE['rating']
 		year = MOVIE['year']
 		stars = MOVIE['cast']
+		cover = MOVIE['cover url']
 
 		try:
 			exist = Movie.objects.get(title=title)
@@ -46,4 +47,5 @@ def search(request):
 	return render(request, 'search.html', {
 		'found':found,
 		'movie':searched_movie,
+		'cover':cover,
 		})

@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IMDb</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+</head>
+<body>
+	<nav>
+    <div class="nav-wrapper grey darken-3 valign-wrapper">
+    	<ul class="left">
+    		<li class="yellow-text text-lighten-3"><h5>Search the Movie By URL </h5></li>
+    	</ul>
+      	<a href="{% url 'search' %}" class="brand-logo right amber darken-3 btn">IMDb</a>
+    </div>
+  </nav>
+	<div class="container">
+		<div class="card-panel cyan accent-1">
+			<div class="row">
+				<form class="container" method="POST">
+					{% csrf_token %}
+					<div class="">
+						<div class="input-field">
+							<label for="url" style="font-weight: bold;">Enter the IMDb URL</label>
+							<input type="text" name="imdb_url" id="url" required>	
+						</div>
+					</div>
+					<div class="center-align">
+						<input type="submit" class="btn deep-orange accent-3" value="Search">
+					</div>
+				</form>
+			</div>
+		</div>
+		{% if found %}
+			<div class="card-panel">
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Title</h4>
+					</div>
+					<div class="card-body">
+						<h5>{{ movie.title }}</h5>
+					</div>
+				</div>
+				 
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Year</h4>
+					</div>
+					<div class="card-body">
+						<h5>{{ movie.year }}</h5>
+					</div>
+				</div>
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Plot</h4>
+					</div>
+					<div class="card-body">
+						<h5>{{ movie.plot }}</h5>
+					</div>
+				</div>
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Director</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							{% for director in movie.director %}
+								<div class="col s4">
+								 	<div class="card-panel hoverable white">
+								 		{{ director }}
+								 	</div>
+								 </div>
+						 	{% endfor %}	
+						</div>
+					</div>
+				</div>
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Writer</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							{% for writer in movie.writer %}
+								<div class="col s4">
+								 	<div class="card-panel hoverable white">
+								 		{{ writer }}
+								 	</div>
+								 </div>
+						 	{% endfor %}	
+						</div>
+					</div>
+				</div>
+				<div class="card center-align light-blue">
+					<div class="card-header grey lighten-3">
+						<h4>Stars</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							{% for star in movie.stars %}
+								<div class="col s4">
+								 	<div class="card-panel hoverable white">
+								 		{{ star }}
+								 	</div>
+								 </div>
+						 	{% endfor %}	
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	
+</body>
+</html>

@@ -39,10 +39,8 @@ def search(request):
 			movie.stars = stars
 			movie.year = year
 			movie.save()
-		movie_obj = Movie.objects.all().values()
-		mv = list(movie_obj)
-		return JsonResponse(mv, safe=False)
-	else:
-		print("Nothing typed")
-		searched_movie = ['Nothing', 'Found']
+		movie_obj = Movie.objects.filter(title=title).values()
+		mvie = list(movie_obj)
+		return JsonResponse(mvie, safe=False)
+	
 	return render(request, 'search.html', {})

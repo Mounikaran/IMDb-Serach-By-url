@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from re import findall
 
+from django.http import JsonResponse
+
 # imdb 
 from imdb import IMDb
 #from imdb.helpers import get_byURL
@@ -10,8 +12,6 @@ from .models import Movie
 
 def search(request):
 	url = request.POST.get('imdb_url')
-	found = False
-	cover = None
 	if url:
 		ID = findall(r'\d+', url)[0]
 		imdb_obj = IMDb()
@@ -39,13 +39,10 @@ def search(request):
 			movie.stars = stars
 			movie.year = year
 			movie.save()
-		searched_movie = Movie.objects.get(title=title)
-		found = True
+		movie_obj = Movie.objects.all().values()
+		mv = list(movie_obj)
+		return JsonResponse(mv, safe=False)
 	else:
 		print("Nothing typed")
 		searched_movie = ['Nothing', 'Found']
-	return render(request, 'search.html', {
-		'found':found,
-		'movie':searched_movie,
-		'cover':cover,
-		})
+	return render(request, 'search.html', {})
